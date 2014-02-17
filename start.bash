@@ -6,18 +6,19 @@
 
 GHOST="/ghost"
 OVERRIDE="/ghost-override"
-DATA="content/data"
+CONTENT="content"
 
 cd "$GHOST"
 
 # Symlinks files.
 if [[ -n $(ls -A "$OVERRIDE") ]]; then
-  cp -frs "$OVERRIDE/*" "$GHOST" 2> /dev/null
+  # Orig line to symlink all files in /ghost-override no worky. Copy only config.js for now.
+  cp -frs "$OVERRIDE/config.js" "$GHOST" 2> /dev/null
 fi
-
-# Symlink data directory.
-mkdir -p "$OVERRIDE/$DATA"
-rm -fr "$DATA"
-ln -s "$OVERRIDE/$DATA" content
+ 
+# Symlink content directory.
+mkdir -p "$OVERRIDE/$CONTENT"
+rm -fr "$CONTENT"
+ln -s "$OVERRIDE/$CONTENT" content
 
 npm start
