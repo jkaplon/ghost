@@ -5,7 +5,11 @@
 #
 
 # Pull base image.
-FROM dockerfile/nodejs
+FROM node
+
+# Install package dependencies
+RUN apt-get update
+RUN apt-get install unzip -y
 
 # Install Ghost
 RUN mkdir -p /ghost
